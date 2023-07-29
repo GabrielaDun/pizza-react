@@ -1,0 +1,33 @@
+.people {
+
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-left: 5px;
+    .booked {
+        display: flex;
+        flex-direction: row;
+        .sign {
+            width: 70px;
+            margin-top: 5px;
+        }
+        .form {
+            width: 40px;
+        }
+        .signTwo {
+            width: 15px;
+            margin-top: 5px;
+        }
+    }
+    .avaliable {
+        display: flex;
+        flex-direction: row;
+        .sign {
+            width: 20px;
+            margin: 5px 0 10px 10px;
+        }
+        .form {
+            width: 40px;
+        }
+    }
+}
