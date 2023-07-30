@@ -1,4 +1,12 @@
+import { useSelector } from "react-redux";
+import { getTableList } from "../../redux/listRedux";
+
 const AllTables = () => {
+    
+    const tableData = useSelector(getTableList);
+    console.log(tableData);   
+    
+
     return (
         <div>
         <h1 className="mt-5 mb-2">All tables</h1>
