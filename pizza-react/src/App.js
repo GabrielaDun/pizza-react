@@ -5,13 +5,13 @@ import { Routes, Route } from 'react-router-dom';
 import SingleTables from "./component/SingleTable/SingleTable";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchList } from "./redux/tableRedux";
+import { fetchTable } from "./redux/tableRedux";
 
 const  App = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => fetchList(dispatch), [dispatch]);
+  useEffect(() => dispatch(fetchTable()), [dispatch]);
 
   return (
     <main>
