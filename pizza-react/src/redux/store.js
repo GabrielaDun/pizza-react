@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from 'redux';
+import tablesReducer from './tableRedux';
 
 
 //selectors
@@ -6,6 +7,7 @@ export const getAllColumns = state => state.columns;
 
 
   const subreducers = {
+    tables: tablesReducer
   }
   
   const reducer = combineReducers(subreducers);

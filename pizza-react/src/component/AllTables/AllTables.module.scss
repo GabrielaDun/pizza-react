@@ -1,0 +1,25 @@
+
+.table {
+    padding: 20px 0;
+    .tab {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        border-bottom: 1px solid gray;
+        
+        .left {
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+            .status {
+                padding-left: 20px;
+                padding-top: 15px;
+                justify-content: center;
+            }
+        }
+        .right {
+            align-items: center;
+        }
+    }
+}
