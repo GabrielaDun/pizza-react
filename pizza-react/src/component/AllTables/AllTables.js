@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { getTableList } from "../../redux/tableRedux";
 import styles from './AllTables.module.scss'
+import { Link } from "react-router-dom";
 
 const AllTables = () => {
     
@@ -19,7 +20,11 @@ const AllTables = () => {
                     <p className={styles.status}><b>Status: </b>{table.status}</p>
                 </div>
                 <div className={styles.right}>
-                    <button className="btn btn-primary" type="submit">Show more</button>
+                    <Link key={table.id} to={'/table/'+table.id}>
+                        <button className="btn btn-primary" type="submit">
+                            Show more
+                        </button>
+                    </Link> 
                 </div>
             </div>
         </div>

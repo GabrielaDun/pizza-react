@@ -19,7 +19,7 @@ const  App = () => {
       <Container>
         <Routes>
           <Route path="/" element={<AllTables />} />
-          <Route path="/table/:id" element={<SingleTables />} />
+          <Route path="/table/:tablesId" element={<SingleTables />} />
         </Routes>
       </Container>
     </main>
