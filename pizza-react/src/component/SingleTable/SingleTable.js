@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import styles from './SingleTable.module.scss'
 import { useSelector } from 'react-redux';
-import { getTableById } from '../../redux/tableRedux';
+import { getStatusList, getTableById } from '../../redux/tableRedux';
 
 const SingleTables = () => {
     const {tablesId} = useParams();
@@ -9,6 +9,9 @@ const SingleTables = () => {
 
     const table = useSelector(state => getTableById(state, tablesId))
     console.log(table);
+
+    const statusData = useSelector(getStatusList);
+    console.log(statusData);
     
     return (
         <div>

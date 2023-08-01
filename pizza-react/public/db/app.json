@@ -32,5 +32,6 @@
         "seats-avaliable": "2",
         "bill": "70"
       }
-  ]
+  ],
+  "status": ["Busy", "Reserved", "Cleaning", "Free"]
 }

@@ -1,6 +1,8 @@
 const inititalState = {
     tables: [
 
+    ],
+    status: [
 
     ]
 };
