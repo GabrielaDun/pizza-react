@@ -5,7 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import SingleTables from "./component/SingleTable/SingleTable";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchStatus, fetchTable } from "./redux/tableRedux";
+import { fetchTable } from "./redux/tableRedux";
+import { fetchStatus } from "./redux/tableStatusReducer";
 
 const  App = () => {
 

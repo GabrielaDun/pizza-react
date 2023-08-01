@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import styles from './SingleTable.module.scss'
 import { useSelector } from 'react-redux';
-import { getStatusList, getTableById } from '../../redux/tableRedux';
+import { getTableById } from '../../redux/tableRedux';
+import { getStatusList } from '../../redux/tableStatusReducer';
 
 const SingleTables = () => {
     const {tablesId} = useParams();
@@ -12,7 +13,7 @@ const SingleTables = () => {
 
     const statusData = useSelector(getStatusList);
     console.log(statusData);
-    
+
     return (
         <div>
             <h1 className="mt-5 mb-2">{table.name}</h1>
