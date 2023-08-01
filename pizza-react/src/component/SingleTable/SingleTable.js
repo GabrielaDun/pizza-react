@@ -1,8 +1,8 @@
 /* eslint-disable array-callback-return */
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styles from './SingleTable.module.scss'
 import { useSelector } from 'react-redux';
-import { getTableById } from '../../redux/tableRedux';
+import { getTableById, getTableList } from '../../redux/tableRedux';
 import { getStatusList } from '../../redux/tableStatusReducer';
 import { Form} from "react-bootstrap";
 import { useState } from 'react';
@@ -13,7 +13,12 @@ const SingleTables = () => {
     const { register, handleSubmit: validate, formState: {errors}} = useForm();
 
     const {tablesId} = useParams();
-    console.log(tablesId);
+    const navigate = useNavigate();
+    const maxTables = useSelector(getTableList)
+    if (tablesId > useSelector(getTableList).length){
+        navigate('/')
+    }
+
     const table = useSelector(state => getTableById(state, tablesId))
     console.log(table);
     const statusData = useSelector(getStatusList);
@@ -27,15 +32,14 @@ const SingleTables = () => {
         if (currentStatus === "Free") {
             setBill(0);
         }
+        navigate('/')
     }
-    console.log(seatsTaken, 'nxosw', seatsMax)
 
     if (seatsTaken&seatsMax > 0){
         if (seatsMax < seatsTaken) {
             setSeatsTaken(seatsMax)
         }
     }
-    console.log(seatsTaken, 'nxosw', seatsMax)
 
     if(!table) {
         return <div>Loading...</div>
