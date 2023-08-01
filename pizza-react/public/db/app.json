@@ -4,32 +4,32 @@
         "id":"1",
         "name": "Table 1",
         "status": "Reserved",
-        "seats-taken": "1",
-        "seats-avaliable": "2",
+        "seatsTaken": "1",
+        "seatsAvaliable": "2",
         "bill": "0"
       },
       { 
         "id":"2",
         "name": "Table 2",
         "status": "Free",
-        "seats-taken": "0",
-        "seats-avaliable": "4",
+        "seatsTaken": "0",
+        "seatsAvaliable": "4",
         "bill": "0"
       },
       { 
         "id":"3",
         "name": "Table 3",
         "status": "Busy",
-        "seats-taken": "3",
-        "seats-avaliable": "3",
+        "seatsTaken": "3",
+        "seatsAvaliable": "3",
         "bill": "45"
       },
       { 
         "id":"4",
         "name": "Table 4",
         "status": "Cleaning",
-        "seats-taken": "0",
-        "seats-avaliable": "2",
+        "seatsTaken": "0",
+        "seatsAvaliable": "2",
         "bill": "70"
       }
   ],

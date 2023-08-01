@@ -1,8 +1,10 @@
+/* eslint-disable array-callback-return */
 import { useParams } from 'react-router-dom';
 import styles from './SingleTable.module.scss'
 import { useSelector } from 'react-redux';
 import { getTableById } from '../../redux/tableRedux';
 import { getStatusList } from '../../redux/tableStatusReducer';
+import { Form} from "react-bootstrap";
 
 const SingleTables = () => {
     const {tablesId} = useParams();
@@ -14,24 +16,32 @@ const SingleTables = () => {
     const statusData = useSelector(getStatusList);
     console.log(statusData);
 
+
     return (
         <div>
             <h1 className="mt-5 mb-2">{table.name}</h1>
-            <div className="row g-3 align-items-center mt-2">
-                <div className="col-auto">
-                    <label className="col-form-label">Status:</label>
-                </div>
-                <div className="col-auto">
-                    <input className="form-control"></input>
-                </div>
-            </div>
+            <form className="row g-3 align-items-center mt-2">
+                <Form.Group>
+                    <Form.Label className="col-auto">
+                        <label className="col-form-label">Status:</label>
+                    </Form.Label>
+                    <Form.Select className="col-auto">
+                        <option>{table.status}</option>
+                        {statusData.map ( status => {
+                            if(status!== table.status) {
+                                return (<option >{status}</option>)
+                            }
+                        })}
+                    </Form.Select>
+                </Form.Group>
+            </form>
             <div className={styles.people}>
                 <div className={styles.booked}>
                 <div className={styles.sign}>
                         <label className="row-form-label">People</label>
                     </div> 
                     <div className={styles.form}>
-                        <input className=" form-control " />
+                        <input className=" form-control "></input>
                     </div>
                 </div>
                 <div className={styles.avaliable}>
