@@ -19,8 +19,8 @@ const SingleTables = () => {
     const statusData = useSelector(getStatusList);
 
     const [currentStatus, setCurrentStatus] = useState((table && table.status) || ''); 
-    const [seatsTaken, setSeatsTaken] = useState((table && table.seatsTaken) || '');
-    const [seatsAvaliable, setSeatsAvaliable] = useState((table && table.seatsAvaliable) || '');
+    let [seatsTaken, setSeatsTaken] = useState((table && table.seatsTaken) || '');
+    let [seatsMax, setSeatsMax] = useState((table && table.seatsAvaliable) || '');
     const [bill, setBill] = useState((table && table.bill) || '');
 
     const handleSubmit = () => {
@@ -28,6 +28,14 @@ const SingleTables = () => {
             setBill(0);
         }
     }
+    console.log(seatsTaken, 'nxosw', seatsMax)
+
+    if (seatsTaken&seatsMax > 0){
+        if (seatsMax < seatsTaken) {
+            setSeatsTaken(seatsMax)
+        }
+    }
+    console.log(seatsTaken, 'nxosw', seatsMax)
 
     if(!table) {
         return <div>Loading...</div>
@@ -68,14 +76,15 @@ const SingleTables = () => {
                         <label className="row-form-label">/</label>
                     </div> 
                     <Form.Control 
-                        {...register('seats', {required: true, min: 0, max: 10})}
+                        {...register('seatsMax', {required: true, min: 0, max: 10})}
                         className={styles.form}
-                        value={seatsAvaliable}
-                        onChange={e => setSeatsAvaliable(e.target.value)}
+                        value={seatsMax}
+                        onChange={e => setSeatsMax(e.target.value)}
                     />
                 </div>
             </Form.Group>
             {errors.seats&&<small className={styles.error}>These fields need to numbered between 0 and 10.</small>}
+            {errors.seatsMax&&<small className={styles.error}>These fields need to numbered between 0 and 10.</small>}
             {table.status==="Busy" && <Form.Group>
                     <div className={styles.people}>
                         <div className={styles.booked}>
