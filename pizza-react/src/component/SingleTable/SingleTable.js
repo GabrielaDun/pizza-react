@@ -35,37 +35,43 @@ const SingleTables = () => {
                     </Form.Select>
                 </Form.Group>
             </form>
-            <div className={styles.people}>
+            <Form.Group className={styles.people}>
                 <div className={styles.booked}>
-                <div className={styles.sign}>
+                    <Form.Label className={styles.sign}>
                         <label className="row-form-label">People</label>
-                    </div> 
-                    <div className={styles.form}>
-                        <input className=" form-control "></input>
-                    </div>
+                    </Form.Label> 
+                    <Form.Control 
+                        className={styles.form}
+                        value={table.seatsTaken}
+                    />
                 </div>
                 <div className={styles.avaliable}>
                     <div className={styles.sign}>
                         <label className="row-form-label">/</label>
                     </div> 
-                    <div className={styles.form}>
-                        <input className=" form-control " />
-                    </div>
+                    <Form.Control 
+                        className={styles.form}
+                        value={table.seatsAvaliable}
+                    />
                 </div>
-            </div>
-            <div className={styles.people}>
-                <div className={styles.booked}>
-                    <div className={styles.sign}>
-                        <label className="row-form-label">Bill:</label>
-                    </div> 
-                    <div className={styles.signTwo}>
-                        <label className="row-form-label">$</label>
-                    </div> 
-                    <div className={styles.form}>
-                        <input className=" form-control " />
+            </Form.Group>
+            {table.status==="Busy" && <Form.Group>
+
+                    <div className={styles.people}>
+                        <div className={styles.booked}>
+                            <div className={styles.sign}>
+                                <label className="row-form-label">Bill:</label>
+                            </div> 
+                            <div className={styles.signTwo}>
+                                <label className="row-form-label">$</label>
+                            </div> 
+                            <Form.Control 
+                                className={styles.form}
+                                value={table.bill}
+                            />
+                        </div>
                     </div>
-                </div>
-            </div>
+            </Form.Group>}
             <div className="col mt-4">
                 <button className="col btn btn-primary" type="submit">Show more</button>
             </div>
