@@ -2,7 +2,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './SingleTable.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { editTables, editTableRequest, getTableById, getTableList } from '../../redux/tableRedux';
+import { editTableRequest, getTableById, getTableList } from '../../redux/tableRedux';
 import { getStatusList } from '../../redux/tableStatusReducer';
 import { Form} from "react-bootstrap";
 import { useState } from 'react';
@@ -23,13 +23,17 @@ const SingleTables = () => {
     let [seatsTaken, setSeatsTaken] = useState((table && table.seatsTaken) || '');
     const [seatsMax, setSeatsMax] = useState((table && table.seatsMax) || '');
     const [bill, setBill] = useState((table && table.bill) || '');
+    console.log(currentStatus);
+
 
     if (tablesId > useSelector(getTableList).length){
         navigate('/')
     }
 
-    const handleSubmit = () => {
-        dispatch(editTableRequest({currentStatus, seatsTaken, seatsMax, bill}));
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const name = "Table " + table.id;
+        dispatch(editTableRequest({id: table.id, name: name, currentStatus: currentStatus, seatsTaken: seatsTaken, seatsMax: seatsMax, bill: bill}));
 
         if (currentStatus === "Free") {
             setBill(0);
@@ -47,7 +51,7 @@ const SingleTables = () => {
         return <div>Loading...</div>
     } else {
         return (
-        <form onSubmit={validate(handleSubmit)}>
+        <form onSubmit={e => validate(handleSubmit(e))}>
             <h1 className="mt-5 mb-2">{table.name}</h1>
             <Form.Group className="row g-3 align-items-center mt-2">
                 <Form.Label className="col-auto">

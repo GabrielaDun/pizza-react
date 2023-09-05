@@ -12,8 +12,10 @@ const  App = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(fetchTable()), [dispatch]);
-  useEffect(() => dispatch(fetchStatus()), [dispatch]);
+  useEffect(() => {
+    dispatch(fetchTable());
+    dispatch(fetchStatus());
+  }, [dispatch]);
 
   return (
     <main>
