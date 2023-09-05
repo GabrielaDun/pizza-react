@@ -1,8 +1,8 @@
-/* eslint-disable array-callback-return */
+
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './SingleTable.module.scss'
-import { useSelector } from 'react-redux';
-import { getTableById, getTableList } from '../../redux/tableRedux';
+import { useDispatch, useSelector } from 'react-redux';
+import { editTables, editTableRequest, getTableById, getTableList } from '../../redux/tableRedux';
 import { getStatusList } from '../../redux/tableStatusReducer';
 import { Form} from "react-bootstrap";
 import { useState } from 'react';
@@ -14,28 +14,30 @@ const SingleTables = () => {
 
     const {tablesId} = useParams();
     const navigate = useNavigate();
-    const maxTables = useSelector(getTableList)
+    const dispatch = useDispatch();
+
+    const table = useSelector(state => getTableById(state, tablesId))
+    const statusData = useSelector(getStatusList);
+
+    const [currentStatus, setCurrentStatus] = useState((table && table.currentStatus) || ''); 
+    let [seatsTaken, setSeatsTaken] = useState((table && table.seatsTaken) || '');
+    const [seatsMax, setSeatsMax] = useState((table && table.seatsMax) || '');
+    const [bill, setBill] = useState((table && table.bill) || '');
+
     if (tablesId > useSelector(getTableList).length){
         navigate('/')
     }
 
-    const table = useSelector(state => getTableById(state, tablesId))
-    console.log(table);
-    const statusData = useSelector(getStatusList);
-
-    const [currentStatus, setCurrentStatus] = useState((table && table.status) || ''); 
-    let [seatsTaken, setSeatsTaken] = useState((table && table.seatsTaken) || '');
-    let [seatsMax, setSeatsMax] = useState((table && table.seatsAvaliable) || '');
-    const [bill, setBill] = useState((table && table.bill) || '');
-
     const handleSubmit = () => {
+        dispatch(editTableRequest({currentStatus, seatsTaken, seatsMax, bill}));
+
         if (currentStatus === "Free") {
             setBill(0);
         }
         navigate('/')
     }
 
-    if (seatsTaken&seatsMax > 0){
+    if (seatsTaken | seatsMax > 0){
         if (seatsMax < seatsTaken) {
             setSeatsTaken(seatsMax)
         }
@@ -56,11 +58,11 @@ const SingleTables = () => {
                     onChange={e => setCurrentStatus(e.target.value)}
                 >
                     <option>{currentStatus}</option>
-                    {statusData.map ( dataStatus => {
-                        if(dataStatus!== table.status) {
-                            return (<option >{dataStatus}</option>)
-                        }
-                    })}
+                    {statusData.map ( dataStatus => 
+                        dataStatus!== table.currentStatus 
+                            ? <option key={dataStatus}>{dataStatus}</option>
+                            : null
+                    )}
                 </Form.Select>
             </Form.Group>
             <Form.Group className={styles.people}>
