@@ -21,13 +21,20 @@ const SingleTables = () => {
 
     const [currentStatus, setCurrentStatus] = useState((table && table.currentStatus) || ''); 
     let [seatsTaken, setSeatsTaken] = useState((table && table.seatsTaken) || '');
-    const [seatsMax, setSeatsMax] = useState((table && table.seatsMax) || '');
-    const [bill, setBill] = useState((table && table.bill) || '');
+    let [seatsMax, setSeatsMax] = useState((table && table.seatsMax) || '');
+    let [bill, setBill] = useState((table && table.bill) || 0 );
     console.log(currentStatus);
 
 
     if (tablesId > useSelector(getTableList).length){
         navigate('/')
+    }
+
+    const checkAmount = () => {
+        if (currentStatus === 'Cleaning' || currentStatus === 'Free') {
+            setBill(0)
+        }
+
     }
 
     const handleSubmit = (e) => {
@@ -59,7 +66,10 @@ const SingleTables = () => {
                 </Form.Label>
                 <Form.Select 
                     className="col-auto"
-                    onChange={e => setCurrentStatus(e.target.value)}
+                    onChange={e => {
+                        setCurrentStatus(e.target.value)
+                        checkAmount(e.target.value);
+                    }}
                 >
                     <option>{currentStatus}</option>
                     {statusData.map ( dataStatus => 
@@ -78,7 +88,13 @@ const SingleTables = () => {
                         {...register('seats', {required: true, min: 0, max: 10})}
                         className={styles.form}
                         value={seatsTaken}
-                        onChange={e => setSeatsTaken(e.target.value)}
+                        onChange={e => {
+                            if (e.target.value >= 0 && e.target.value <= 10) {
+                                if (seatsTaken <= seatsMax) {
+                                    setSeatsTaken(e.target.value)
+                                }
+                            }
+                        }}
                     />
                 </div>
                 <div className={styles.avaliable}>
@@ -89,13 +105,17 @@ const SingleTables = () => {
                         {...register('seatsMax', {required: true, min: 0, max: 10})}
                         className={styles.form}
                         value={seatsMax}
-                        onChange={e => setSeatsMax(e.target.value)}
+                        onChange={e => {
+                            if (e.target.value >= 0 && e.target.value <= 10) {
+                                setSeatsMax(e.target.value)
+                            }
+                        }}
                     />
                 </div>
             </Form.Group>
             {errors.seats&&<small className={styles.error}>These fields need to numbered between 0 and 10.</small>}
             {errors.seatsMax&&<small className={styles.error}>These fields need to numbered between 0 and 10.</small>}
-            {table.status==="Busy" && <Form.Group>
+            {currentStatus === "Busy" && <Form.Group>
                     <div className={styles.people}>
                         <div className={styles.booked}>
                             <div className={styles.sign}>
