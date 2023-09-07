@@ -3,15 +3,15 @@
     {
       "id": "1",
       "name": "Table 1",
-      "currentStatus": "Cleaning",
+      "currentStatus": "Busy",
       "seatsTaken": "3",
       "seatsMax": "4",
-      "bill": "30"
+      "bill": "3"
     },
     {
       "id": "2",
       "name": "Table 2",
-      "currentStatus": "Busy",
+      "currentStatus": "Reserved",
       "seatsTaken": "2",
       "seatsMax": "20",
       "bill": 0
