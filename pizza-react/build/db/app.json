@@ -1,0 +1,42 @@
+{
+  "tables": [
+    {
+      "id": "1",
+      "name": "Table 1",
+      "currentStatus": "Cleaning",
+      "seatsTaken": "3",
+      "seatsMax": "4",
+      "bill": "30"
+    },
+    {
+      "id": "2",
+      "name": "Table 2",
+      "currentStatus": "Busy",
+      "seatsTaken": "2",
+      "seatsMax": "20",
+      "bill": 0
+    },
+    {
+      "id": "3",
+      "name": "Table 3",
+      "currentStatus": "Cleaning",
+      "seatsTaken": "2",
+      "seatsMax": "3",
+      "bill": "45"
+    },
+    {
+      "id": "4",
+      "name": "Table 4",
+      "currentStatus": "Cleaning",
+      "seatsTaken": "0",
+      "seatsMax": "3",
+      "bill": "0"
+    }
+  ],
+  "status": [
+    "Busy",
+    "Reserved",
+    "Cleaning",
+    "Free"
+  ]
+}
